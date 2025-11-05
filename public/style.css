@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #f7f7f7;
+    overflow: hidden;
+}
+
+.node circle {
+    fill: #fff;
+    stroke: #444;
+    stroke-width: 1.5px;
+    cursor: pointer;
+}
+
+.node text {
+    font-size: 12px;
+    user-select: none;
+}
+
+.link {
+    fill: none;
+    stroke: #aaa;
+    stroke-width: 1.2px;
+}

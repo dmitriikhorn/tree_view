@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Tree Search</h2>
+<input id="q" onkeyup="search()" placeholder="Search..." />
+<ul id="results"></ul>
+<script>
+    async function search() {
+        const q = document.getElementById("q").value;
+        const res = await fetch(`/search?q=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        document.getElementById("results").innerHTML = data
+            .map((d) => `<li>${d.path} (id: ${d.id})</li>`)
+            .join("");
+    }
+</script>
+</body>
+</html>
