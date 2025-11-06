@@ -11,12 +11,10 @@ svg.attr("width", document.body.clientWidth)
     .attr("height", document.body.clientHeight);
 
 
-let root = { id: "root", name: "configuration", children: [], loaded: false };
+let root = {id: "root", name: "configuration", children: [], loaded: false};
 
 await fetchChildren(root);
 update(root);
-
-//TODO: get yang type, color it, pass some info
 
 async function fetchChildren(node) {
     if (node.loaded) return;
@@ -26,7 +24,7 @@ async function fetchChildren(node) {
         id: d.id,
         name: d.name,
         parent_id: d.parent_id,
-        yang_type: d.type, // Enum
+        yang_type: d.type,
         children: [],
         loaded: false,
     }));
@@ -69,7 +67,10 @@ async function update(source) {
             update(node);
         });
 
-    nodeEnter.append("circle").attr("r", 6);
+    nodeEnter.append("circle")
+        .attr("r", 6)
+        .attr("class", d => `yang-node ${d.data.yang_type}`);
+
     nodeEnter.append("text").attr("x", 10).attr("dy", 3).text(d => d.data.name);
 
     const nodeUpdate = nodeEnter.merge(nodeSel);

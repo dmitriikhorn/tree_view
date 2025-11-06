@@ -22,7 +22,7 @@ let db;
     app.get("/node/:id", async (req, res) => {
         const id = req.params.id === "root" ? null : req.params.id;
         const rows = await db.all(
-            "SELECT id, name, parent_id FROM yang_models WHERE parent_id IS ? LIMIT 1000",
+            "SELECT id, name, parent_id, type FROM yang_models WHERE parent_id IS ? LIMIT 1000",
             [id]
         );
         res.json(rows);
