@@ -1,8 +1,25 @@
 body {
+    display: flex;
     margin: 0;
-    font-family: sans-serif;
-    background: #f7f7f7;
+    height: 100vh;
     overflow: hidden;
+}
+
+
+#left, #right {
+    flex: 1;
+    border-right: 1px solid #ddd;
+    display: flex;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#right {
+    border-right: none;
 }
 
 .node circle {
@@ -28,14 +45,72 @@ body {
     fill: #000000;
 }
 
-.ChoiceNode      { fill: #9b59b6; }
-.ContainerNode   { fill: #3498db; }
-.LeafNode        { fill: #16974b; }
-.LeafListNode    { fill: #7bf0d9; }
-.ListNode        { fill: #f1d73e; }
-.CaseNode        { fill: #e74c3c; }
-
-
 .yang-node:hover {
     stroke-width: 2px;
 }
+
+#legend {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    padding: 10px 14px;
+    width: 80px;
+    font-size: 6px;
+    color: #333;
+    z-index: 50;
+}
+
+#legend h3 {
+    margin: 0 0 6px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #444;
+}
+
+.legend-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.3;
+}
+
+.legend-color {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    flex-shrink: 0;
+}
+
+:root {
+    --color-choice:      #9b59b6;
+    --color-container:   #3498db;
+    --color-leaf:        #16974b;
+    --color-leaflist:    #7bf0d9;
+    --color-list:        #f1d73e;
+    --color-case:        #e74c3c;
+}
+
+.node .ChoiceNode      { fill: var(--color-choice); }
+.node .ContainerNode   { fill: var(--color-container); }
+.node .LeafNode        { fill: var(--color-leaf); }
+.node .LeafListNode    { fill: var(--color-leaflist); }
+.node .ListNode        { fill: var(--color-list); }
+.node .CaseNode        { fill: var(--color-case); }
+
+.legend-color.ChoiceNode      { background-color: var(--color-choice); }
+.legend-color.ContainerNode   { background-color: var(--color-container); }
+.legend-color.LeafNode        { background-color: var(--color-leaf); }
+.legend-color.LeafListNode    { background-color: var(--color-leaflist); }
+.legend-color.ListNode        { background-color: var(--color-list); }
+.legend-color.CaseNode        { background-color: var(--color-case); }
