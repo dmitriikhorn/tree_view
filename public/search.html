@@ -2,13 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tree Search</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="search.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <h3>Tree search</h3>
-<svg width="500vw" height="500vh"></svg>
-<script></script>
+    <h1>YANG search</h1>
+
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search through YANG model..." />
+        <button id="search-btn">Search</button>
+    </div>
+
+    <div id="search-results"></div>
+
+    <svg width="500vw" height="500vh"></svg>
+    <script type="module" src="search.js"></script>
 </body>
 </html>

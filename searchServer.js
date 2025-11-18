@@ -1,4 +1,4 @@
-////sudo docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:9.2.0
+// sudo docker run -d -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:9.2.0
 
 import express from "express";
 import sqlite3 from "sqlite3";
