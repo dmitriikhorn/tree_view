@@ -64,11 +64,12 @@ iframe {
     z-index: 50;
 }
 
-#legend h3 {
-    margin: 0 0 6px;
-    font-size: 10px;
-    font-weight: 600;
-    color: #444;
+#legend {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
 }
 
 .legend-content {

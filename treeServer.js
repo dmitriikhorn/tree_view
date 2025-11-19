@@ -52,7 +52,7 @@ async function syncToElasticsearch() {
     console.log(`Indexed ${rows.length} elements`);
 }
 
-await syncToElasticsearch();
+// await syncToElasticsearch();
 
 (async () => {
 

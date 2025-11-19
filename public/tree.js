@@ -1,5 +1,5 @@
 const svg = d3.select("svg").attr("width", window.innerWidth).attr("height", window.innerHeight);
-const g = svg.append("g").attr("transform", "translate(100,500)");
+const g = svg.append("g");
 
 const zoom = d3.zoom().on("zoom", e => g.attr("transform", e.transform));
 svg.call(zoom);
@@ -29,12 +29,6 @@ async function fetchChildren(node) {
         loaded: false,
     }));
     node.loaded = true;
-
-    if (node.id === "root") {
-        node._children = node.children;
-        node.children = [];
-    }
-
 }
 
 async function update(source) {
@@ -50,7 +44,6 @@ async function update(source) {
     const nodeEnter = nodeSel.enter()
         .append("g")
         .attr("class", "node")
-        .attr("transform", d => `translate(${source.y0 || 0},${source.x0 || 0})`)
         .on("click", async (event, d) => {
             const node = d.data;
             if (node.children && node.children.length) {
