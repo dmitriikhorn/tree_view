@@ -5,6 +5,17 @@ body {
     overflow: hidden;
 }
 
+svg {
+    cursor: grab;
+}
+
+svg:active {
+    cursor: grabbing;
+}
+
+.node circle {
+    cursor: pointer;
+}
 
 #left, #right {
     flex: 1;
