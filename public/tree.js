@@ -37,12 +37,14 @@ async function update(source) {
     const rootData = d3.hierarchy(root, d => d.children);
     tree(rootData);
     const nodes = rootData.descendants();
-    const links = tree(rootData).links();
+    const links = rootData.links();
 
     const nodeSel = g.selectAll(".node").data(nodes, d => d.data.id);
 
     const nodeEnter = nodeSel.enter()
         .append("g")
+        .attr("transform", d => `translate(${d.parent?.y0 ?? d.y0 ?? 0},
+                                    ${d.parent?.x0 ?? d.x0 ?? 0})`)
         .attr("class", "node")
         .on("click", async (event, d) => {
             const node = d.data;
@@ -72,6 +74,24 @@ async function update(source) {
     nodeSel.exit().remove();
 
     const linkSel = g.selectAll(".link").data(links, d => d.target.data.id);
-    const linkEnter = linkSel.enter().insert("path", "g").attr("class", "link").attr("d", diagonal);
+
+    const linkEnter = linkSel.enter()
+        .insert("path", "g")
+        .attr("class", "link")
+        .attr("d", d => {
+            const o = { x: source.x0, y: source.y0 };
+            return diagonal({ source: o, target: o });
+        });
+
+    linkEnter.merge(linkSel)
+        .transition()
+        .attr("d", diagonal);
+
     linkSel.exit().remove();
+
+    nodes.forEach(d => {
+        d.x0 = d.x;
+        d.y0 = d.y;
+    });
+
 }
