@@ -31,6 +31,26 @@ async function fetchChildren(node) {
     node.loaded = true;
 }
 
+function showPopup(event, message) {
+    const popup = document.createElement("div");
+    popup.className = "copy-popup";
+    popup.textContent = message;
+
+    document.body.appendChild(popup);
+
+    popup.style.left = event.pageX + 5 + "px";
+    popup.style.top = event.pageY - 15 + "px";
+
+    requestAnimationFrame(() => {
+        popup.style.opacity = 1;
+    });
+
+    setTimeout(() => {
+        popup.style.opacity = 0;
+        setTimeout(() => popup.remove(), 200);
+    }, 700);
+}
+
 async function update(source) {
     await fetchChildren(source);
 
@@ -45,8 +65,14 @@ async function update(source) {
         .append("g")
         .attr("transform", d => `translate(${d.parent?.y0 ?? d.y0 ?? 0},
                                     ${d.parent?.x0 ?? d.x0 ?? 0})`)
-        .attr("class", "node")
+        .attr("class", "node");
+
+    nodeEnter.append("circle")
+        .attr("r", 6)
+        .attr("class", d => `yang-node ${d.data.yang_type}`)
+
         .on("click", async (event, d) => {
+            event.stopPropagation();
             const node = d.data;
             if (node.children && node.children.length) {
                 node._children = node.children;
@@ -62,11 +88,19 @@ async function update(source) {
             update(node);
         });
 
-    nodeEnter.append("circle")
-        .attr("r", 6)
-        .attr("class", d => `yang-node ${d.data.yang_type}`);
-
     nodeEnter.append("text").attr("x", 10).attr("dy", 3).text(d => d.data.name);
+
+    nodeEnter.append("text")
+        .attr("x", 10)
+        .attr("dy", 3)
+        .text(d => d.data.name)
+        .style("cursor", "copy")
+        .on("click", (event, d) => {
+            event.stopPropagation();
+            navigator.clipboard.writeText(d.data.name)
+                .then(() => showPopup(event, "copied!"))
+                .catch(() => {});
+        });
 
     const nodeUpdate = nodeEnter.merge(nodeSel);
     nodeUpdate.transition().attr("transform", d => `translate(${d.y},${d.x})`);
