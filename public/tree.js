@@ -18,7 +18,7 @@ update(root);
 
 async function fetchChildren(node) {
     if (node.loaded) return;
-    const res = await fetch(`/node/${node.id}`);
+    const res = await fetch(`/ytv/node/${node.id}`);
     const data = await res.json();
     node.children = data.map(d => ({
         id: d.id,

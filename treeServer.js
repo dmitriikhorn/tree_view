@@ -17,9 +17,9 @@ const db = await open({
 
 (async () => {
 
-    app.use(express.static(path.join(__dirname, "public")));
+    app.use("/ytv", express.static(path.join(__dirname, "public")));
 
-    app.get("/node/:id", async (req, res) => {
+    app.get("/ytv/node/:id", async (req, res) => {
         const id = req.params.id === "root" ? null : req.params.id;
         const rows = await db.all(
             "SELECT id, name, parent_id, type FROM yang_models WHERE parent_id IS ? LIMIT 1000",
@@ -28,7 +28,7 @@ const db = await open({
         res.json(rows);
     });
 
-    app.get("/search", async (req, res) => {
+    app.get("/ytv/search", async (req, res) => {
         const query = req.query.q || "";
         try {
             const result = await es.search({

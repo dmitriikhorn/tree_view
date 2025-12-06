@@ -7,7 +7,7 @@ async function search(query) {
         container.innerHTML = '';
         return;
     }
-    const res = await fetch(`/search?q=${encodeURIComponent(query)}`);
+    const res = await fetch(`/ytv/search?q=${encodeURIComponent(query)}`);
     const data = await res.json();
     renderResults(data);
 }
