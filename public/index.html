@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
-<link rel="icon" type="image/x-icon" href="/ytv/favicon.ico">
 <head>
-    <link rel="stylesheet" href="tree.css">
+    <link rel="icon" href="/ytv/favicon.ico">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-<div id="left">
-    <iframe src="tree.html"></iframe>
+
+<div id="drag-overlay"></div>
+
+<div id="container">
+    <div id="left">
+        <iframe src="tree.html"></iframe>
+    </div>
+
+    <div id="divider"></div>
+
+    <div id="right">
+        <iframe src="search.html"></iframe>
+    </div>
 </div>
 
-<div id="right">
-    <iframe src="search.html"></iframe>
-</div>
+<script src="index.js"></script>
 </body>
 </html>

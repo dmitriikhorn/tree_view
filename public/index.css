@@ -1,0 +1,43 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#container {
+    display: flex;
+    height: 100vh;
+}
+
+#left {
+    overflow: hidden;
+    display: flex;
+    flex: 0 0 50%;
+}
+
+#right {
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+}
+
+#divider {
+    width: 6px;
+    cursor: col-resize;
+    background: #ccc;
+}
+
+#drag-overlay {
+    position: fixed;
+    inset: 0;
+    cursor: col-resize;
+    display: none;
+    z-index: 9999;
+}
+
+#left iframe,
+#right iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+}

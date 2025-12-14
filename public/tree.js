@@ -7,10 +7,6 @@ svg.call(zoom);
 const tree = d3.tree().nodeSize([30, 180]);
 const diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
 
-svg.attr("width", document.body.clientWidth)
-    .attr("height", document.body.clientHeight);
-
-
 let root = {id: "root", name: "configuration", children: [], loaded: false};
 
 await fetchChildren(root);
@@ -129,3 +125,17 @@ async function update(source) {
     });
 
 }
+
+const observer = new ResizeObserver(entries => {
+    for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+
+        svg
+            .attr("width", width)
+            .attr("height", height);
+
+        update(root);
+    }
+});
+
+observer.observe(document.body);
